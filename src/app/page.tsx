@@ -1,27 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
-import { client } from "./client";
+import Link from "next/link";
+import { AboutSection } from "./components/AboutSection";
+import { LoanSection } from "./components/LoanSection";
+import { FeaturesSection } from "./components/FeaturesSection";
+import { FAQSection } from "./components/FAQSection";
+import { Footer } from "./components/Footer";
+
+
 
 export default function Home() {
   return (
-    <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
-      <div className="py-20">
-        <Header />
-
-        <div className="flex justify-center mb-20">
-          <ConnectButton
-            client={client}
-            appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
-            }}
-          />
+    <main className="min-h-[100vh] bg-gradient-to-b from-gray-900 to-gray-800">
+      {/* Hero Section */}
+      <div className="w-full relative pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <Header />
         </div>
+        
+        {/* Background Grid */}
+        <div className="absolute inset-0 overflow-hidden -z-10">
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
+        </div>
+      </div>
 
-        <ThirdwebResources />
+      {/* Features Section */}
+      <div className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+        <PlatformFeatures />
+
+          {/* Partners Section */}
+      <PartnersSection />
+      <AboutSection/>
+      <LoanSection/>
+      <FeaturesSection/>
+      <FAQSection/>
+      <Footer/>
       </div>
     </main>
   );
@@ -29,72 +44,130 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="flex flex-col items-center mb-20 md:mb-20">
-      <Image
-        src={thirdwebIcon}
-        alt=""
-        className="size-[150px] md:size-[150px]"
-        style={{
-          filter: "drop-shadow(0px 0px 24px #a726a9a8)",
-        }}
-      />
+    <header className="relative z-10 text-center">
+      <div className="mb-12 animate-fade-in">
+        <Image
+          src={thirdwebIcon}
+          alt="CryptoLend Logo"
+          width={120}
+          height={120}
+          className="mx-auto mb-8 hover:scale-105 transition-transform"
+          style={{
+            filter: "drop-shadow(0px 0px 24px #4f46e5a8)",
+          }}
+        />
+      </div>
 
-      <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-zinc-100">
-        thirdweb SDK
-        <span className="text-zinc-300 inline-block mx-1"> + </span>
-        <span className="inline-block -skew-x-6 text-blue-500"> Next.js </span>
-      </h1>
+      <div className="text-center">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          Decentralized
+          <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mx-4">
+            Crypto Lending
+          </span>
+          <br />
+          Across Chains
+        </h1>
+        
+        <p className="text-xl text-zinc-300 mt-8 max-w-4xl mx-auto mb-16">
+          Earn competitive yields on your digital assets or access liquidity 
+          through secure, cross-chain collateralized loans
+        </p>
 
-      <p className="text-zinc-300 text-base">
-        Read the{" "}
-        <code className="bg-zinc-800 text-zinc-300 px-2 rounded py-1 text-sm mx-1">
-          README.md
-        </code>{" "}
-        file to get started.
-      </p>
+        {/* Buttons with proper spacing */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
+          <Link
+            href="/get-started"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors text-lg shadow-lg hover:shadow-purple-500/20"
+          >
+            Get Started
+          </Link>
+          <Link
+            href="/learn-more"
+            className="border-2 border-purple-600 text-purple-400 hover:bg-purple-600/10 font-semibold py-4 px-8 rounded-lg transition-colors text-lg"
+          >
+            Learn More
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }
 
-function ThirdwebResources() {
+function PlatformFeatures() {
   return (
-    <div className="grid gap-4 lg:grid-cols-3 justify-center">
-      <ArticleCard
-        title="thirdweb SDK Docs"
-        href="https://portal.thirdweb.com/typescript/v5"
-        description="thirdweb TypeScript SDK documentation"
-      />
-
-      <ArticleCard
-        title="Components and Hooks"
-        href="https://portal.thirdweb.com/typescript/v5/react"
-        description="Learn about the thirdweb React components and hooks in thirdweb SDK"
-      />
-
-      <ArticleCard
-        title="thirdweb Dashboard"
-        href="https://thirdweb.com/dashboard"
-        description="Deploy, configure, and manage your smart contracts from the dashboard."
-      />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+      {[
+        {
+          title: "Multi-Chain Support",
+          description: "Ethereum, Polygon, Solana & more",
+          color: "from-purple-500 to-blue-500",
+        },
+        {
+          title: "High Yield Rates",
+          description: "Up to 12% APY on stablecoins",
+          color: "from-green-500 to-teal-500",
+        },
+        {
+          title: "Instant Liquidity",
+          description: "Borrow against crypto in minutes",
+          color: "from-orange-500 to-red-500",
+        },
+        {
+          title: "Secure Vaults",
+          description: "Insurance-backed cold storage",
+          color: "from-pink-500 to-purple-500",
+        },
+      ].map((feature, index) => (
+        <div
+          key={index}
+          className={`bg-gradient-to-br ${feature.color} p-0.5 rounded-xl`}
+        >
+          <div className="h-full bg-gray-900 rounded-xl p-6 hover:bg-gray-800/50 transition-all">
+            <h3 className="text-2xl font-bold text-white mb-3">
+              {feature.title}
+            </h3>
+            <p className="text-zinc-300">{feature.description}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-function ArticleCard(props: {
-  title: string;
-  href: string;
-  description: string;
-}) {
+function PartnersSection() {
   return (
-    <a
-      href={props.href + "?utm_source=next-template"}
-      target="_blank"
-      className="flex flex-col border border-zinc-800 p-4 rounded-lg hover:bg-zinc-900 transition-colors hover:border-zinc-700"
-    >
-      <article>
-        <h2 className="text-lg font-semibold mb-2">{props.title}</h2>
-        <p className="text-sm text-zinc-400">{props.description}</p>
-      </article>
-    </a>
+    <div className="w-full py-20 bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 className="text-2xl font-bold text-center text-zinc-300 mb-12">
+          Trusted by Leading Institutions
+        </h3>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 items-center justify-center">
+          {[
+            { name: "Coinbase", logo: "/logos/coinbase.svg" },
+            { name: "Thirdweb", logo: "/logos/thirdweb.svg" },
+            { name: "Metamask", logo: "/logos/metamask.png" },
+            { name: "Chase", logo: "/logos/chase.svg" },
+            { name: "Bank of America", logo: "/logos/boa.svg" },
+            { name: "Bitfinex", logo: "/logos/bitfinex.svg" },
+            { name: "JPMorgan", logo: "/logos/jpmorgan.svg" },
+            { name: "Blackrock", logo: "/logos/blackrock.svg" },
+          ].map((partner, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-center p-4 bg-white rounded-xl hover:bg-gray-100 transition-colors"
+            >
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
