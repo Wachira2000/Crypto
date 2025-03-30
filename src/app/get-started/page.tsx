@@ -1,6 +1,6 @@
 
 "use client";
-
+import { ethereum } from "thirdweb/chains";
 import { ConnectButton, useActiveAccount, useWalletBalance } from "thirdweb/react";
 import { client } from "@/app/client";
 import { ArrowPathIcon, WalletIcon, CurrencyDollarIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
@@ -8,7 +8,10 @@ import { useState } from "react";
 
 export default function GetStartedPage() {
   const account = useActiveAccount();
-  const { data: balance, isLoading: balanceLoading } = useWalletBalance({ address: account?.address });
+  const { data: balance, isLoading: balanceLoading } = useWalletBalance({
+    client,                  // Add the Thirdweb client
+    chain: ethereum,         // Specify the Ethereum chain
+    address: account?.address }); // Keep the wallet address
   const [step, setStep] = useState(1);
 
   return (
@@ -41,14 +44,21 @@ export default function GetStartedPage() {
               Securely connect your cryptocurrency wallet to get started with your loan application.
             </p>
             <ConnectButton
-              client={client}
-              theme="dark"
-              appMetadata={{
-                name: "CryptoLend",
-                url: "https://crypto-lend.com",
-              }}
-              className="mx-auto"
-            />
+    client={client}
+    appMetadata={{
+      name: "CryptoLend",
+      url: "https://crypto-lend.com",
+    }}
+    theme="dark"
+    connectButton={{
+      className: "bg-purple-600 hover:bg-purple-700 transition-colors px-8 py-4 text-base",
+      style: {
+        borderRadius: "12px",
+        padding: "1rem 2rem"
+      },
+      label: "Connect Wallet"
+    }}
+  />
             {account && (
               <button
                 onClick={() => setStep(2)}
