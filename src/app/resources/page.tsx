@@ -15,8 +15,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Resources() {
-  const [selectedResource, setSelectedResource] = useState(null);
-  const [activeGlobeRegion, setActiveGlobeRegion] = useState(null);
+  const [selectedResource, setSelectedResource] = useState<string | null>(null);
+  const [activeGlobeRegion, setActiveGlobeRegion] = useState<string | null>(null);
 
   const resourceCategories = [
     {
