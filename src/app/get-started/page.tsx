@@ -12,7 +12,7 @@ export default function GetStartedPage() {
   const [step, setStep] = useState(1);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-20">
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-2">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Progress Steps */}
         <div className="flex justify-center mb-16">

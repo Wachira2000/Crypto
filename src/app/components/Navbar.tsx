@@ -21,7 +21,7 @@ export function Navbar() {
     { name: "Home", path: "/" },
     {
       name: "Products",
-      path: "/products",
+      path: "#",
       dropdown: [
         { name: "Lending", path: "/lending", badge: "New" },
         { name: "Borrowing", path: "/borrowing" },
@@ -120,7 +120,7 @@ export function Navbar() {
         {/* Right Section */}
         <div className="flex items-center gap-8">
           {/* Connect Button */}
-          <div className="bg-purple-600 hover:bg-purple-700 transition-colors rounded-xl shadow-sm">
+          <div className="rounded-xl shadow-sm">
             <ConnectButton
               client={client}
               appMetadata={{
@@ -128,7 +128,14 @@ export function Navbar() {
                 url: "https://crypto-lend.com",
               }}
               theme="dark"
-              style={{ padding: "1rem 2rem", fontSize: "1rem" }}
+              connectButton={{
+                className: "bg-purple-600 hover:bg-purple-700 transition-colors px-8 py-4 text-base",
+                style: {
+                  borderRadius: "12px",
+                  padding: "1rem 2rem"
+                },
+                label: "Connect Wallet"
+              }}
             />
           </div>
 

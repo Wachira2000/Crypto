@@ -3,12 +3,9 @@
 import Image from "next/image";
 import thirdwebIcon from "@public/thirdweb.svg";
 import Link from "next/link";
-import { AboutSection } from "./components/AboutSection";
 import { LoanSection } from "./components/LoanSection";
 import { FeaturesSection } from "./components/FeaturesSection";
 import { FAQSection } from "./components/FAQSection";
-import { Footer } from "./components/Footer";
-
 
 
 export default function Home() {
@@ -32,11 +29,10 @@ export default function Home() {
 
           {/* Partners Section */}
       <PartnersSection />
-      <AboutSection/>
       <LoanSection/>
       <FeaturesSection/>
       <FAQSection/>
-      <Footer/>
+     
       </div>
     </main>
   );
@@ -82,11 +78,11 @@ function Header() {
             Get Started
           </Link>
           <Link
-            href="/learn-more"
-            className="border-2 border-purple-600 text-purple-400 hover:bg-purple-600/10 font-semibold py-4 px-8 rounded-lg transition-colors text-lg"
-          >
-            Learn More
-          </Link>
+  href="/learn-more"
+  className="border-2 border-purple-600 text-purple-400 hover:bg-purple-600/10 font-semibold py-4 px-8 rounded-lg transition-colors text-lg"
+>
+  Learn More
+</Link>
         </div>
       </div>
     </header>
