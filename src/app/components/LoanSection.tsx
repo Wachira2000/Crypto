@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import { CalculatorIcon, DocumentTextIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 import { client } from "@/app/client";
-
+import { ethereum } from "thirdweb/chains"; // Add this import
 
 export function LoanSection() {
     const account = useActiveAccount();
-    const { data: balance } = useWalletBalance({ address: account?.address });
+    const { data: balance } = useWalletBalance({
+        client,                  // Add the client
+        chain: ethereum,         // Specify the Ethereum chain
+        address: account?.address // Existing address
+    });
     const [collateralAmount, setCollateralAmount] = useState("");
     const [collateralError, setCollateralError] = useState("");
     const [loanTerm, setLoanTerm] = useState("6");
