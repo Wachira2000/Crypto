@@ -1,18 +1,29 @@
-
 "use client";
+
 import { ethereum } from "thirdweb/chains";
 import { ConnectButton, useActiveAccount, useWalletBalance } from "thirdweb/react";
 import { client } from "@/app/client";
 import { ArrowPathIcon, WalletIcon, CurrencyDollarIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 
 export default function GetStartedPage() {
   const account = useActiveAccount();
   const { data: balance, isLoading: balanceLoading } = useWalletBalance({
-    client,                  // Add the Thirdweb client
-    chain: ethereum,         // Specify the Ethereum chain
-    address: account?.address }); // Keep the wallet address
+    client,                  
+    chain: ethereum,         
+    address: account?.address 
+  });
   const [step, setStep] = useState(1);
+  const router = useRouter(); // Initialize router
+
+  // Function to handle the confirmation of the loan agreement
+  const handleConfirmLoan = () => {
+    // Show the user that the application is successful
+    alert("Your loan application is successful!");
+    // Redirect the user to the dashboard page
+    router.push("/dashboard");
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24 pb-2">
@@ -44,21 +55,21 @@ export default function GetStartedPage() {
               Securely connect your cryptocurrency wallet to get started with your loan application.
             </p>
             <ConnectButton
-    client={client}
-    appMetadata={{
-      name: "CryptoLend",
-      url: "https://crypto-lend.com",
-    }}
-    theme="dark"
-    connectButton={{
-      className: "bg-purple-600 hover:bg-purple-700 transition-colors px-8 py-4 text-base",
-      style: {
-        borderRadius: "12px",
-        padding: "1rem 2rem"
-      },
-      label: "Connect Wallet"
-    }}
-  />
+              client={client}
+              appMetadata={{
+                name: "CryptoLend",
+                url: "https://crypto-lend.com",
+              }}
+              theme="dark"
+              connectButton={{
+                className: "bg-purple-600 hover:bg-purple-700 transition-colors px-8 py-4 text-base",
+                style: {
+                  borderRadius: "12px",
+                  padding: "1rem 2rem"
+                },
+                label: "Connect Wallet"
+              }}
+            />
             {account && (
               <button
                 onClick={() => setStep(2)}
@@ -174,7 +185,10 @@ export default function GetStartedPage() {
                     <span>12.5%</span>
                   </div>
                 </div>
-                <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+                <button
+                  onClick={handleConfirmLoan}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+                >
                   Confirm Loan Agreement
                 </button>
               </div>
@@ -185,3 +199,4 @@ export default function GetStartedPage() {
     </main>
   );
 }
+``
